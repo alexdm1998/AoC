@@ -24,24 +24,47 @@ for height, string in enumerate(lab_map):
 direcs = [[-1,0],[0,1],[1,0],[0,-1]]
 cd = 0
 
-historic = set()
-while True:
-    pcy = cy + direcs[cd][0]
-    pcx = cx + direcs[cd][1]
 
-    if pcy not in range(n) or pcx not in range(m):
-        historic.add((cy,cx))
-        break
-
-    if lab_map[pcy][pcx] == "#":
-        cd = (cd + 1) % 4
-    else:
-        historic.add((cy,cx))
-        cy = pcy
-        cx = pcx
 
 counter = 0
-for tile in historic:
-    print(tile)
-    counter += 1
+for i in range(n):
+    for j in range(m):
+        print("Checking at: (" + str(i) + "," + str(j) + ")")
+        print("Current counter of obstacles: " + str(counter))
+
+        historic = set()
+
+        if not lab_map[i][j] == "#" or not lab_map[i][j] == "^":
+            lab_map[i][j] = "#"
+        else:
+            continue
+
+        while True:
+            pcy = cy + direcs[cd][0]
+            pcx = cx + direcs[cd][1]
+        
+            if pcy not in range(n) or pcx not in range(m):
+                break
+            
+            next_tile = (cy, cx, cd)
+            if next_tile in historic:
+                counter += 1
+                break
+            
+            if lab_map[pcy][pcx] == "#":
+                historic.add((cy,cx,cd))
+                cd = (cd + 1) % 4
+            else:
+                cy = pcy
+                cx = pcx
+        
+        lab_map[i][j] = "."
+        
 print(counter)
+
+
+
+
+
+
+
