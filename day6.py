@@ -26,8 +26,29 @@ icd = 0
 
 
 
+history = set()
+lcy, lcx, lcd = icy, icx, icd
+while True:
+    pcy = lcy + direcs[lcd][0]
+    pcx = lcx + direcs[lcd][1]
 
-exited = 0
+    if pcy not in range(n) or pcx not in range(m):
+        history.add((lcy,lcy))
+        break
+
+    if lab_map[pcy][pcx] == "#":
+        lcd = (lcd + 1) % 4
+    else:
+        history.add((lcy, lcx))
+        lcy = pcy
+        lcx = pcx
+counter = 0
+for tile in history:
+    counter += 1
+print("####### Part 1 #######")
+print(counter) #4758
+
+
 counter = 0
 for i in range(n):
     for j in range(m):
@@ -44,7 +65,6 @@ for i in range(n):
             pcx = cx + direcs[cd][1]
             
             if pcy not in range(n) or pcx not in range(m):
-                exited += 1
                 break
 
             tile = (pcy, pcx, cd)
@@ -60,5 +80,5 @@ for i in range(n):
                 cx = pcx
 
         lab_map[i][j] = "."
-
+print("##### Part 2 ######")
 print(counter) #1670
