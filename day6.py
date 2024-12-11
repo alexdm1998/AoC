@@ -12,7 +12,7 @@ for line in lab:
     lab_map.append(line_array)
 
 
-#Part 1
+
 n = len(lab_map)
 m = len(lab_map[0])
 icy, icx = 0,0
@@ -25,7 +25,7 @@ direcs = [[-1,0],[0,1],[1,0],[0,-1]]
 icd = 0
 
 
-
+#Part 1
 history = set()
 lcy, lcx, lcd = icy, icx, icd
 while True:
@@ -48,7 +48,7 @@ for tile in history:
 print("####### Part 1 #######")
 print(counter) #4758
 
-
+#Part 2
 counter = 0
 for i in range(n):
     for j in range(m):
